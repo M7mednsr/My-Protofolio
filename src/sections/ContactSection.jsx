@@ -32,30 +32,27 @@ const ContactSection = () => {
     setLoading(true);
 
     try {
+      // Using FormData instead of JSON to prevent pre-flight CORS/Adblocker issues
+      const formData = new FormData(e.target);
+      formData.append("access_key", "afb11398-0682-4388-8601-c95658be1c6e");
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          // Replace this key with your own access key from https://web3forms.com/
-          access_key: "YOUR_WEB3FORMS_ACCESS_KEY_HERE",
-          name: form.name,
-          email: form.email,
-          message: form.message,
-        }),
+        body: formData
       });
 
       const result = await response.json();
+      
       if (result.success) {
         setSubmitted(true);
         setForm({ name: '', email: '', message: '' });
       } else {
-        alert("Something went wrong. Please try again later.");
+        alert("Configuration Error: " + (result.message || "Unknown error"));
+        console.error("Web3Forms Error:", result);
       }
     } catch (error) {
-      alert("Error sending message. Please check your connection and try again.");
+      alert("Network Error: Please check your connection. (If you have an Adblocker or Brave Shields active, try pausing it for a moment)");
+      console.error("Submission Error:", error);
     } finally {
       setLoading(false);
     }
