@@ -21,7 +21,6 @@ const ContactSection = () => {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [focused, setFocused] = useState(null);
 
   const handleChange = (e) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -32,7 +31,6 @@ const ContactSection = () => {
     setLoading(true);
 
     try {
-      // Using FormData instead of JSON to prevent pre-flight CORS/Adblocker issues
       const formData = new FormData(e.target);
       formData.append("access_key", "afb11398-0682-4388-8601-c95658be1c6e");
 
@@ -108,148 +106,69 @@ const ContactSection = () => {
     },
   ];
 
-  const inputStyle = (name) => ({
-    width: '100%',
-    padding: '14px 18px',
-    background: focused === name ? 'rgba(79,142,247,0.06)' : 'rgba(255,255,255,0.04)',
-    border: focused === name
-      ? '1px solid rgba(79,142,247,0.5)'
-      : '1px solid rgba(255,255,255,0.08)',
-    borderRadius: '14px',
-    color: 'var(--text-primary)',
-    fontSize: '0.95rem',
-    fontFamily: 'Inter, sans-serif',
-    outline: 'none',
-    transition: 'all 0.3s ease',
-    boxShadow: focused === name ? '0 0 20px rgba(79,142,247,0.1)' : 'none',
-    resize: 'none',
-  });
-
   return (
     <section
       id="contact"
-      style={{
-        padding: '120px 24px',
-        background: 'var(--bg-secondary, #111114)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      className="py-[120px] px-6 bg-(--bg-secondary,#111114) relative overflow-hidden"
     >
       {/* Top decoration */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.3), transparent)',
-      }} />
+      <div 
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.3), transparent)' }} 
+      />
 
       {/* Gradient blob */}
-      <div style={{
-        position: 'absolute',
-        top: '-10%',
-        left: '-10%',
-        width: '500px',
-        height: '500px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+      <div 
+        className="absolute -top-[10%] -left-[10%] w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, rgba(79,142,247,0.07) 0%, transparent 70%)' }} 
+      />
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="max-w-[1100px] mx-auto">
         {/* Header */}
-        <div ref={titleRef} className="reveal" style={{ textAlign: 'center', marginBottom: '72px' }}>
+        <div ref={titleRef} className="reveal text-center mb-[72px]">
           <div className="section-badge">Contact</div>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-            fontWeight: '800',
-            fontFamily: 'Inter, sans-serif',
-            letterSpacing: '-1px',
-            color: 'var(--text-primary)',
-            marginBottom: '16px',
-          }}>
+          <h2 className="text-[clamp(2rem,5vw,3.2rem)] font-extrabold font-['Inter',sans-serif] tracking-[-1px] text-(--text-primary) mb-4">
             Let's Build Something{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>Amazing</span>
+            <span className="bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text">
+              Amazing
+            </span>
           </h2>
-          <p style={{
-            fontSize: '1rem',
-            color: 'var(--text-secondary)',
-            fontFamily: 'Inter, sans-serif',
-            maxWidth: '480px',
-            margin: '0 auto',
-            lineHeight: '1.7',
-          }}>
+          <p className="text-[1rem] text-(--text-secondary) font-['Inter',sans-serif] max-w-[480px] mx-auto leading-[1.7]">
             Have a project in mind? I'd love to hear about it. Let's create something great together.
           </p>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '40px',
-          alignItems: 'start',
-        }}>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-10 items-start">
           {/* Form */}
           <div ref={formRef} className="reveal-left">
-            <div className="glass" style={{
-              borderRadius: '24px',
-              padding: '40px',
-              border: '1px solid var(--border-color)',
-            }}>
+            <div className="glass p-10 rounded-3xl border border-(--border-color)">
               {submitted ? (
-                <div style={{
-                  textAlign: 'center',
-                  padding: '40px 0',
-                }}>
-                  <div style={{ fontSize: '4rem', marginBottom: '20px' }}>🎉</div>
-                  <h3 style={{
-                    fontSize: '1.4rem',
-                    fontWeight: '700',
-                    fontFamily: 'Inter, sans-serif',
-                    color: 'var(--text-primary)',
-                    marginBottom: '12px',
-                  }}>Message Sent!</h3>
-                  <p style={{
-                    color: 'var(--text-secondary)',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: '0.95rem',
-                  }}>Thanks for reaching out. I'll get back to you soon.</p>
+                <div className="text-center py-10">
+                  <div className="text-[4rem] mb-5">🎉</div>
+                  <h3 className="text-[1.4rem] font-bold font-['Inter',sans-serif] text-(--text-primary) mb-3">
+                    Message Sent!
+                  </h3>
+                  <p className="text-[0.95rem] text-(--text-secondary) font-['Inter',sans-serif]">
+                    Thanks for reaching out. I'll get back to you soon.
+                  </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="btn-primary"
-                    style={{ marginTop: '24px' }}
+                    className="btn-primary mt-6"
                   >
                     <span>Send Another</span>
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} id="contact-form">
-                  <h3 style={{
-                    fontSize: '1.2rem',
-                    fontWeight: '700',
-                    fontFamily: 'Inter, sans-serif',
-                    color: 'var(--text-primary)',
-                    marginBottom: '28px',
-                  }}>Send a Message</h3>
+                  <h3 className="text-[1.2rem] font-bold font-['Inter',sans-serif] text-(--text-primary) mb-7">
+                    Send a Message
+                  </h3>
 
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+                  <div className="flex flex-col gap-[18px]">
                     <div>
-                      <label style={{
-                        display: 'block',
-                        fontSize: '0.82rem',
-                        fontWeight: '600',
-                        color: 'var(--text-secondary)',
-                        fontFamily: 'Inter, sans-serif',
-                        marginBottom: '8px',
-                        letterSpacing: '0.5px',
-                        textTransform: 'uppercase',
-                      }}>Name</label>
+                      <label className="block text-[0.82rem] font-semibold text-(--text-secondary) font-['Inter',sans-serif] mb-2 tracking-[0.5px] uppercase">
+                        Name
+                      </label>
                       <input
                         id="contact-name"
                         name="name"
@@ -258,23 +177,14 @@ const ContactSection = () => {
                         placeholder="Your name"
                         value={form.name}
                         onChange={handleChange}
-                        onFocus={() => setFocused('name')}
-                        onBlur={() => setFocused(null)}
-                        style={inputStyle('name')}
+                        className="w-full px-[18px] py-[14px] bg-white/5 border border-white/10 rounded-[14px] text-(--text-primary) text-[0.95rem] font-['Inter',sans-serif] outline-none transition-all duration-300 focus:bg-[#4f8ef70f] focus:border-[#4f8ef780] focus:shadow-[0_0_20px_rgba(79,142,247,0.1)]"
                       />
                     </div>
 
                     <div>
-                      <label style={{
-                        display: 'block',
-                        fontSize: '0.82rem',
-                        fontWeight: '600',
-                        color: 'var(--text-secondary)',
-                        fontFamily: 'Inter, sans-serif',
-                        marginBottom: '8px',
-                        letterSpacing: '0.5px',
-                        textTransform: 'uppercase',
-                      }}>Email</label>
+                      <label className="block text-[0.82rem] font-semibold text-(--text-secondary) font-['Inter',sans-serif] mb-2 tracking-[0.5px] uppercase">
+                        Email
+                      </label>
                       <input
                         id="contact-email"
                         name="email"
@@ -283,23 +193,14 @@ const ContactSection = () => {
                         placeholder="your@email.com"
                         value={form.email}
                         onChange={handleChange}
-                        onFocus={() => setFocused('email')}
-                        onBlur={() => setFocused(null)}
-                        style={inputStyle('email')}
+                        className="w-full px-[18px] py-[14px] bg-white/5 border border-white/10 rounded-[14px] text-(--text-primary) text-[0.95rem] font-['Inter',sans-serif] outline-none transition-all duration-300 focus:bg-[#4f8ef70f] focus:border-[#4f8ef780] focus:shadow-[0_0_20px_rgba(79,142,247,0.1)]"
                       />
                     </div>
 
                     <div>
-                      <label style={{
-                        display: 'block',
-                        fontSize: '0.82rem',
-                        fontWeight: '600',
-                        color: 'var(--text-secondary)',
-                        fontFamily: 'Inter, sans-serif',
-                        marginBottom: '8px',
-                        letterSpacing: '0.5px',
-                        textTransform: 'uppercase',
-                      }}>Message</label>
+                      <label className="block text-[0.82rem] font-semibold text-(--text-secondary) font-['Inter',sans-serif] mb-2 tracking-[0.5px] uppercase">
+                        Message
+                      </label>
                       <textarea
                         id="contact-message"
                         name="message"
@@ -308,9 +209,7 @@ const ContactSection = () => {
                         placeholder="Tell me about your project..."
                         value={form.message}
                         onChange={handleChange}
-                        onFocus={() => setFocused('message')}
-                        onBlur={() => setFocused(null)}
-                        style={inputStyle('message')}
+                        className="w-full px-[18px] py-[14px] bg-white/5 border border-white/10 rounded-[14px] text-(--text-primary) text-[0.95rem] font-['Inter',sans-serif] outline-none transition-all duration-300 resize-none focus:bg-[#4f8ef70f] focus:border-[#4f8ef780] focus:shadow-[0_0_20px_rgba(79,142,247,0.1)]"
                       />
                     </div>
 
@@ -318,13 +217,7 @@ const ContactSection = () => {
                       type="submit"
                       id="contact-submit"
                       disabled={loading}
-                      className="btn-primary"
-                      style={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        opacity: loading ? 0.7 : 1,
-                        cursor: loading ? 'not-allowed' : 'pointer',
-                      }}
+                      className={`btn-primary w-full justify-center ${loading ? 'opacity-70 cursor-not-allowed' : 'cursor-pointer'}`}
                     >
                       <span>{loading ? 'Sending...' : 'Send Message'}</span>
                       {!loading && (
@@ -340,21 +233,12 @@ const ContactSection = () => {
           </div>
 
           {/* Contact Info */}
-          <div ref={infoRef} className="reveal-right" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          <div ref={infoRef} className="reveal-right flex flex-col gap-6">
             <div>
-              <h3 style={{
-                fontSize: '1.4rem',
-                fontWeight: '700',
-                fontFamily: 'Inter, sans-serif',
-                color: 'var(--text-primary)',
-                marginBottom: '8px',
-              }}>Let's Connect</h3>
-              <p style={{
-                fontSize: '0.95rem',
-                color: 'var(--text-secondary)',
-                fontFamily: 'Inter, sans-serif',
-                lineHeight: '1.7',
-              }}>
+              <h3 className="text-[1.4rem] font-bold font-['Inter',sans-serif] text-(--text-primary) mb-2">
+                Let's Connect
+              </h3>
+              <p className="text-[0.95rem] text-(--text-secondary) font-['Inter',sans-serif] leading-[1.7]">
                 I'm currently open to freelance work, collaboration, and full-time opportunities. Don't hesitate to reach out!
               </p>
             </div>
@@ -366,75 +250,35 @@ const ContactSection = () => {
                 href={info.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '16px',
-                  padding: '20px',
-                  background: 'var(--bg-card)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '16px',
-                  textDecoration: 'none',
-                  transition: 'all 0.3s ease',
-                  backdropFilter: 'blur(10px)',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = `${info.color}40`;
-                  e.currentTarget.style.boxShadow = `0 0 25px ${info.color}15`;
-                  e.currentTarget.style.transform = 'translateY(-3px)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'var(--border-color)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
+                className="flex items-center gap-4 p-5 bg-(--bg-card) border border-(--border-color) rounded-2xl no-underline transition-all duration-300 backdrop-blur-md hover:border-[#4f8ef740] hover:shadow-[0_0_25px_rgba(79,142,247,0.15)] hover:-translate-y-1 group"
               >
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '14px',
-                  background: `${info.color}15`,
-                  border: `1px solid ${info.color}30`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: info.color,
-                  flexShrink: 0,
-                }}>
+                <div 
+                  className="w-12 h-12 rounded-[14px] flex items-center justify-center shrink-0 transition-colors duration-300"
+                  style={{
+                    background: `${info.color}15`,
+                    border: `1px solid ${info.color}30`,
+                    color: info.color,
+                  }}
+                >
                   {info.icon}
                 </div>
                 <div>
-                  <div style={{
-                    fontSize: '0.75rem',
-                    fontWeight: '600',
-                    color: 'var(--text-muted)',
-                    fontFamily: 'Inter, sans-serif',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    marginBottom: '4px',
-                  }}>{info.label}</div>
-                  <div style={{
-                    fontSize: '0.95rem',
-                    fontWeight: '600',
-                    color: 'var(--text-primary)',
-                    fontFamily: 'Inter, sans-serif',
-                  }}>{info.value}</div>
+                  <div className="text-[0.75rem] font-semibold text-(--text-muted) font-['Inter',sans-serif] tracking-[1px] uppercase mb-1">
+                    {info.label}
+                  </div>
+                  <div className="text-[0.95rem] font-semibold text-(--text-primary) font-['Inter',sans-serif] group-hover:text-blue-400 transition-colors duration-300">
+                    {info.value}
+                  </div>
                 </div>
               </a>
             ))}
 
             {/* Social links */}
             <div>
-              <p style={{
-                fontSize: '0.8rem',
-                fontWeight: '600',
-                color: 'var(--text-muted)',
-                fontFamily: 'Inter, sans-serif',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                marginBottom: '16px',
-              }}>Follow Me</p>
-              <div style={{ display: 'flex', gap: '12px' }}>
+              <p className="text-[0.8rem] font-semibold text-(--text-muted) font-['Inter',sans-serif] tracking-[1px] uppercase mb-4">
+                Follow Me
+              </p>
+              <div className="flex gap-3">
                 {socialLinks.map(social => (
                   <a
                     key={social.id}
@@ -443,31 +287,20 @@ const ContactSection = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     title={social.label}
+                    className="w-12 h-12 rounded-[14px] bg-(--bg-card) border border-(--border-color) flex items-center justify-center text-(--text-secondary) no-underline transition-all duration-300 hover:-translate-y-1"
                     style={{
-                      width: '48px',
-                      height: '48px',
-                      borderRadius: '14px',
-                      background: 'var(--bg-card)',
-                      border: '1px solid var(--border-color)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--text-secondary)',
-                      textDecoration: 'none',
-                      transition: 'all 0.3s ease',
+                      '--hover-color': social.color,
                     }}
                     onMouseEnter={e => {
                       e.currentTarget.style.background = `${social.color}10`;
                       e.currentTarget.style.borderColor = `${social.color}40`;
                       e.currentTarget.style.color = social.color;
-                      e.currentTarget.style.transform = 'translateY(-4px)';
                       e.currentTarget.style.boxShadow = `0 8px 25px ${social.color}20`;
                     }}
                     onMouseLeave={e => {
                       e.currentTarget.style.background = 'var(--bg-card)';
                       e.currentTarget.style.borderColor = 'var(--border-color)';
                       e.currentTarget.style.color = 'var(--text-secondary)';
-                      e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = 'none';
                     }}
                   >

@@ -53,81 +53,58 @@ const SkillCard = ({ skill, index }) => {
       onMouseLeave={() => setHovered(false)}
     >
       <div
+        className="px-6 py-7 rounded-[20px] backdrop-blur-md bg-(--bg-card) transition-all duration-350ms ease-out hover:-translate-y-1.5 cursor-default hover:bg-(--bg-card-hover) border"
         style={{
-          padding: '28px 24px',
-          borderRadius: '20px',
-          background: hovered ? 'var(--bg-card-hover)' : 'var(--bg-card)',
-          backdropFilter: 'blur(16px)',
-          border: hovered
-            ? `1px solid ${skill.color}40`
-            : '1px solid var(--border-color)',
+          borderColor: hovered ? `${skill.color}40` : 'var(--border-color)',
           boxShadow: hovered ? `0 0 30px ${skill.color}20` : 'none',
-          transition: 'all 0.35s ease',
-          transform: hovered ? 'translateY(-6px)' : 'translateY(0)',
-          cursor: 'default',
         }}
       >
         {/* Icon & name */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px' }}>
+        <div className="flex justify-between items-start mb-5">
           <div>
-            <div style={{
-              fontSize: '2.2rem',
-              marginBottom: '10px',
-              filter: hovered ? `drop-shadow(0 0 10px ${skill.color}80)` : 'none',
-              transition: 'filter 0.3s ease',
-            }}>
+            <div 
+              className="text-[2.2rem] mb-2.5 transition-all duration-300 ease-out"
+              style={{ filter: hovered ? `drop-shadow(0 0 10px ${skill.color}80)` : 'none' }}
+            >
               {skill.icon}
             </div>
-            <h3 style={{
-              fontSize: '1rem',
-              fontWeight: '700',
-              fontFamily: 'Inter, sans-serif',
-              color: 'var(--text-primary)',
-            }}>{skill.name}</h3>
+            <h3 className="text-[1rem] font-bold font-['Inter',sans-serif] text-(--text-primary)">
+              {skill.name}
+            </h3>
           </div>
-          <div style={{
-            padding: '4px 12px',
-            background: `${skill.color}15`,
-            border: `1px solid ${skill.color}30`,
-            borderRadius: '50px',
-            fontSize: '0.7rem',
-            fontWeight: '600',
-            color: skill.color,
-            fontFamily: 'Inter, sans-serif',
-          }}>
+          <div 
+            className="px-3 py-1 border rounded-full text-[0.7rem] font-semibold font-['Inter',sans-serif]"
+            style={{
+              background: `${skill.color}15`,
+              borderColor: `${skill.color}30`,
+              color: skill.color,
+            }}
+          >
             {skill.category}
           </div>
         </div>
 
         {/* Progress bar */}
-        <div style={{ marginBottom: '8px' }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '8px',
-          }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'Inter, sans-serif' }}>Proficiency</span>
-            <span style={{
-              fontSize: '0.8rem',
-              fontWeight: '700',
-              fontFamily: 'Inter, sans-serif',
-              color: skill.color,
-            }}>{skill.level}%</span>
+        <div className="mb-2">
+          <div className="flex justify-between mb-2">
+            <span className="text-[0.75rem] text-(--text-muted) font-['Inter',sans-serif]">Proficiency</span>
+            <span 
+              className="text-[0.8rem] font-bold font-['Inter',sans-serif]"
+              style={{ color: skill.color }}
+            >
+              {skill.level}%
+            </span>
           </div>
-          <div style={{
-            height: '6px',
-            background: 'rgba(255,255,255,0.06)',
-            borderRadius: '10px',
-            overflow: 'hidden',
-          }}>
-            <div style={{
-              height: '100%',
-              width: animated ? `${skill.level}%` : '0%',
-              background: `linear-gradient(90deg, ${skill.color}aa, ${skill.color})`,
-              borderRadius: '10px',
-              transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: animated ? `0 0 10px ${skill.color}60` : 'none',
-            }} />
+          <div className="h-1.5 bg-white/5 rounded-full overflow-hidden">
+            <div 
+              className="h-full rounded-full w-0"
+              style={{
+                width: animated ? `${skill.level}%` : '0%',
+                background: `linear-gradient(90deg, ${skill.color}aa, ${skill.color})`,
+                transition: 'width 1.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: animated ? `0 0 10px ${skill.color}60` : 'none',
+              }} 
+            />
           </div>
         </div>
       </div>
@@ -141,71 +118,35 @@ const SkillsSection = () => {
   return (
     <section
       id="skills"
-      style={{
-        padding: '120px 24px',
-        background: 'var(--bg-secondary, #111114)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
+      className="py-[120px] px-6 bg-(--bg-secondary,#111114) relative overflow-hidden"
     >
       {/* Decoration */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.3), transparent)',
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: '1px',
-        background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.3), transparent)',
-      }} />
+      <div 
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(79,142,247,0.3), transparent)' }}
+      />
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-px"
+        style={{ background: 'linear-gradient(90deg, transparent, rgba(168,85,247,0.3), transparent)' }}
+      />
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <div className="max-w-[1100px] mx-auto">
         {/* Header */}
-        <div ref={titleRef} className="reveal" style={{ textAlign: 'center', marginBottom: '72px' }}>
+        <div ref={titleRef} className="reveal text-center mb-[72px]">
           <div className="section-badge">My Skills</div>
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
-            fontWeight: '800',
-            fontFamily: 'Inter, sans-serif',
-            letterSpacing: '-1px',
-            color: 'var(--text-primary)',
-            marginBottom: '16px',
-          }}>
+          <h2 className="text-[clamp(2rem,5vw,3.2rem)] font-extrabold font-['Inter',sans-serif] tracking-[-1px] text-(--text-primary) mb-4">
             Technologies I{' '}
-            <span style={{
-              background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}>
+            <span className="bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text">
               Master
             </span>
           </h2>
-          <p style={{
-            fontSize: '1rem',
-            color: 'var(--text-secondary)',
-            fontFamily: 'Inter, sans-serif',
-            maxWidth: '480px',
-            margin: '0 auto',
-            lineHeight: '1.7',
-          }}>
+          <p className="text-[1rem] text-(--text-secondary) font-['Inter',sans-serif] max-w-[480px] mx-auto leading-[1.7]">
             A carefully curated skill set focused on building modern, performant, and beautiful web applications.
           </p>
         </div>
 
         {/* Skills grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
-          gap: '20px',
-        }}>
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-5">
           {skills.map((skill, i) => (
             <SkillCard key={skill.name} skill={skill} index={i} />
           ))}

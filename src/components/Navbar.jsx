@@ -43,99 +43,25 @@ const Navbar = ({ theme, toggleTheme }) => {
   return (
     <nav
       id="navbar"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        padding: scrolled ? '14px 0' : '22px 0',
-        background: scrolled
-          ? 'rgba(15,15,15,0.85)'
-          : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
-        transition: 'all 0.4s ease',
-      }}
+      className={`fixed top-0 left-0 right-0 z-1000 transition-all duration-400 ease-in-out ${scrolled ? 'py-[14px] bg-[#0f0f0fd9] backdrop-blur-[20px] border-b border-white/5' : 'py-[22px] bg-transparent'}`}
     >
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: '0 24px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}>
+      <div className="max-w-[1200px] mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <button
           onClick={() => scrollTo('home')}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            textDecoration: 'none',
-          }}
+          className="bg-transparent border-none cursor-pointer flex items-center gap-2.5 no-underline"
         >
-          <div style={{
-            width: '36px',
-            height: '36px',
-            background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-            borderRadius: '10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '16px',
-            fontWeight: '800',
-            color: 'white',
-            fontFamily: 'Inter, sans-serif',
-            boxShadow: '0 0 20px rgba(79,142,247,0.4)',
-          }}>M</div>
-          <span style={{
-            fontSize: '1.1rem',
-            fontWeight: '700',
-            fontFamily: 'Inter, sans-serif',
-            background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>Mohamed</span>
+          <div className="w-9 h-9 bg-linear-to-br from-[#4f8ef7] to-[#a855f7] rounded-[10px] flex items-center justify-center text-[16px] font-extrabold text-white font-['Inter',sans-serif] shadow-[0_0_20px_rgba(79,142,247,0.4)]">M</div>
+          <span className="text-[1.1rem] font-bold font-['Inter',sans-serif] bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text">Mohamed</span>
         </button>
 
         {/* Desktop Nav */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }} className="desktop-nav">
+        <div className="desktop-nav flex items-center gap-2">
           {navLinks.map(link => (
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              style={{
-                background: 'none',
-                border: activeSection === link.id ? '1px solid rgba(79,142,247,0.3)' : '1px solid transparent',
-                borderRadius: '50px',
-                padding: '8px 20px',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                fontWeight: '500',
-                fontFamily: 'Inter, sans-serif',
-                color: activeSection === link.id ? '#4f8ef7' : 'var(--text-secondary)',
-                background: activeSection === link.id ? 'rgba(79,142,247,0.08)' : 'transparent',
-                transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={e => {
-                if (activeSection !== link.id) {
-                  e.currentTarget.style.color = '#f8f8ff';
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-                }
-              }}
-              onMouseLeave={e => {
-                if (activeSection !== link.id) {
-                  e.currentTarget.style.color = 'var(--text-secondary)';
-                  e.currentTarget.style.borderColor = 'transparent';
-                }
-              }}
+              className={`bg-transparent rounded-full px-5 py-2 cursor-pointer text-[0.9rem] font-medium font-['Inter',sans-serif] transition-all duration-300 ${activeSection === link.id ? 'border border-[#4f8ef74d] text-[#4f8ef7] bg-[#4f8ef714]' : 'border border-transparent text-(--text-secondary) hover:text-[#f8f8ff] hover:border-white/15'}`}
             >
               {link.label}
             </button>
@@ -143,34 +69,13 @@ const Navbar = ({ theme, toggleTheme }) => {
         </div>
 
         {/* Right side actions */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="flex items-center gap-3">
           {/* Theme toggle */}
           <button
             id="theme-toggle"
             onClick={toggleTheme}
             title="Toggle theme"
-            style={{
-              width: '40px',
-              height: '40px',
-              borderRadius: '50%',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: 'rgba(255,255,255,0.05)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '1.1rem',
-              transition: 'all 0.3s ease',
-              color: 'var(--text-primary)',
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.background = 'rgba(79,142,247,0.15)';
-              e.currentTarget.style.borderColor = 'rgba(79,142,247,0.4)';
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            }}
+            className="w-10 h-10 rounded-full border border-white/10 bg-white/5 cursor-pointer flex items-center justify-center text-[1.1rem] transition-all duration-300 text-(--text-primary) hover:bg-[#4f8ef726] hover:border-[#4f8ef766]"
           >
             {theme === 'dark' ? '☀️' : '🌙'}
           </button>
@@ -179,8 +84,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           <a
             href="mailto:m7mednsr999@gmail.com"
             id="hire-me-btn"
-            className="btn-primary"
-            style={{ padding: '9px 22px', fontSize: '0.85rem' }}
+            className="btn-primary py-[9px] px-[22px] text-[0.85rem]"
           >
             <span>Hire Me</span>
           </a>
@@ -189,31 +93,10 @@ const Navbar = ({ theme, toggleTheme }) => {
           <button
             id="mobile-menu-btn"
             onClick={() => setMenuOpen(!menuOpen)}
-            style={{
-              display: 'none',
-              width: '40px',
-              height: '40px',
-              borderRadius: '10px',
-              border: '1px solid rgba(255,255,255,0.1)',
-              background: 'rgba(255,255,255,0.05)',
-              cursor: 'pointer',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '5px',
-              transition: 'all 0.3s ease',
-            }}
-            className="mobile-menu-btn-elem"
+            className="mobile-menu-btn-elem hidden w-10 h-10 rounded-[10px] border border-white/10 bg-white/5 cursor-pointer flex-col items-center justify-center gap-[5px] transition-all duration-300"
           >
             {[0, 1, 2].map(i => (
-              <span key={i} style={{
-                display: 'block',
-                width: '20px',
-                height: '2px',
-                background: 'var(--text-primary)',
-                borderRadius: '2px',
-                transition: 'all 0.3s ease',
-              }} />
+              <span key={i} className="block w-5 h-[2px] bg-(--text-primary) rounded-[2px] transition-all duration-300" />
             ))}
           </button>
         </div>
@@ -221,36 +104,12 @@ const Navbar = ({ theme, toggleTheme }) => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div style={{
-          position: 'absolute',
-          top: '100%',
-          left: 0,
-          right: 0,
-          background: 'rgba(15,15,15,0.97)',
-          backdropFilter: 'blur(20px)',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
-          padding: '16px 24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
-        }}>
+        <div className="absolute top-full left-0 right-0 bg-[#0f0f0ff7] backdrop-blur-[20px] border-b border-white/5 px-6 py-4 flex flex-col gap-1">
           {navLinks.map(link => (
             <button
               key={link.id}
               onClick={() => scrollTo(link.id)}
-              style={{
-                background: activeSection === link.id ? 'rgba(79,142,247,0.08)' : 'transparent',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '14px 16px',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontWeight: '500',
-                fontFamily: 'Inter, sans-serif',
-                color: activeSection === link.id ? '#4f8ef7' : 'var(--text-primary)',
-                textAlign: 'left',
-                transition: 'all 0.2s ease',
-              }}
+              className={`border-none rounded-[10px] px-4 py-3.5 cursor-pointer text-[1rem] font-medium font-['Inter',sans-serif] text-left transition-all duration-200 ${activeSection === link.id ? 'bg-[#4f8ef714] text-[#4f8ef7]' : 'bg-transparent text-(--text-primary)'}`}
             >
               {link.label}
             </button>

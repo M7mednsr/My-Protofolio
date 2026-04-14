@@ -74,37 +74,12 @@ const CustomCursor = () => {
       {/* Dot */}
       <div
         ref={dotRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '8px',
-          height: '8px',
-          borderRadius: '50%',
-          background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-          pointerEvents: 'none',
-          zIndex: 99999,
-          opacity: 0,
-          transition: 'opacity 0.3s ease',
-          boxShadow: '0 0 10px rgba(79,142,247,0.8)',
-        }}
+        className="fixed top-0 left-0 w-2 h-2 rounded-full pointer-events-none z-99999 opacity-0 transition-opacity duration-300 bg-linear-to-br from-[#4f8ef7] to-[#a855f7] shadow-[0_0_10px_rgba(79,142,247,0.8)]"
       />
       {/* Ring */}
       <div
         ref={ringRef}
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '40px',
-          height: '40px',
-          borderRadius: '50%',
-          border: '1.5px solid rgba(79,142,247,0.5)',
-          pointerEvents: 'none',
-          zIndex: 99998,
-          opacity: 0,
-          transition: 'opacity 0.3s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease',
-        }}
+        className="fixed top-0 left-0 w-10 h-10 rounded-full border-[1.5px] border-[#4f8ef780] pointer-events-none z-99999 opacity-0 transition-all duration-300 ease-out"
       />
     </>
   );

@@ -30,95 +30,28 @@ const LoadingScreen = ({ onDone }) => {
   return (
     <div
       ref={containerRef}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: '#0f0f0f',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 9999,
-        transition: 'opacity 0.6s ease, transform 0.6s ease',
-      }}
+      className="fixed inset-0 bg-[#0f0f0f] flex flex-col items-center justify-center z-9999 transition-all duration-600 ease-in-out"
     >
       {/* Animated logo */}
-      <div style={{
-        marginBottom: '40px',
-        position: 'relative',
-      }}>
-        <div style={{
-          width: '80px',
-          height: '80px',
-          borderRadius: '22px',
-          background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '2rem',
-          fontWeight: '900',
-          color: 'white',
-          fontFamily: 'Inter, sans-serif',
-          boxShadow: '0 0 60px rgba(79,142,247,0.5), 0 0 100px rgba(168,85,247,0.3)',
-          animation: 'pulse-logo 2s ease-in-out infinite',
-        }}>
+      <div className="mb-10 relative">
+        <div className="w-[80px] h-[80px] rounded-[22px] bg-linear-to-br from-[#4f8ef7] to-[#a855f7] flex items-center justify-center text-[2rem] font-black text-white font-['Inter',sans-serif] shadow-[0_0_60px_rgba(79,142,247,0.5),0_0_100px_rgba(168,85,247,0.3)] animate-[pulse-logo_2s_ease-in-out_infinite]">
           M
         </div>
-        <div style={{
-          position: 'absolute',
-          inset: '-8px',
-          borderRadius: '30px',
-          border: '2px solid transparent',
-          background: 'linear-gradient(135deg, #4f8ef7, #a855f7) border-box',
-          WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
-          WebkitMaskComposite: 'destination-out',
-          maskComposite: 'exclude',
-          animation: 'spin-border 3s linear infinite',
-        }} />
+        <div className="absolute -inset-2 rounded-[30px] border-2 border-transparent bg-[linear-gradient(135deg,#4f8ef7,#a855f7)_border-box] [mask:linear-gradient(#fff_0_0)_padding-box,linear-gradient(#fff_0_0)] mask-exclude animate-[spin-border_3s_linear_infinite]" />
       </div>
 
-      <h1 style={{
-        fontFamily: 'Inter, sans-serif',
-        fontSize: '1.5rem',
-        fontWeight: '700',
-        marginBottom: '8px',
-        background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        backgroundClip: 'text',
-        letterSpacing: '-0.5px',
-      }}>
+      <h1 className="font-['Inter',sans-serif] text-[1.5rem] font-bold mb-2 bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text tracking-[-0.5px]">
         Mohamed Nasr
       </h1>
-      <p style={{
-        fontFamily: 'Inter, sans-serif',
-        fontSize: '0.85rem',
-        color: '#6b6b80',
-        letterSpacing: '3px',
-        textTransform: 'uppercase',
-        marginBottom: '48px',
-      }}>
+      <p className="font-['Inter',sans-serif] text-[0.85rem] text-[#6b6b80] tracking-[3px] uppercase mb-12">
         Frontend Developer
       </p>
 
       {/* Progress bar */}
-      <div style={{
-        width: '200px',
-        height: '3px',
-        background: 'rgba(255,255,255,0.07)',
-        borderRadius: '10px',
-        overflow: 'hidden',
-      }}>
+      <div className="w-[200px] h-[3px] bg-white/5 rounded-[10px] overflow-hidden">
         <div
           ref={barRef}
-          style={{
-            height: '100%',
-            width: '0%',
-            background: 'linear-gradient(90deg, #4f8ef7, #a855f7)',
-            borderRadius: '10px',
-            transition: 'width 0.15s ease',
-            boxShadow: '0 0 10px rgba(79,142,247,0.8)',
-          }}
+          className="h-full w-0 bg-linear-to-r from-[#4f8ef7] to-[#a855f7] rounded-[10px] transition-[width] duration-150 ease-in-out shadow-[0_0_10px_rgba(79,142,247,0.8)]"
         />
       </div>
 

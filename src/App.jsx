@@ -26,7 +26,7 @@ function App() {
     <>
       {loading && <LoadingScreen onDone={() => setLoading(false)} />}
       {!loading && (
-        <div style={{ minHeight: '100vh', background: 'var(--bg-primary)', transition: 'background 0.5s ease' }}>
+        <div className="min-h-screen bg-(--bg-primary) transition-colors duration-500">
           <CustomCursor />
           <Navbar theme={theme} toggleTheme={toggleTheme} />
           <main>

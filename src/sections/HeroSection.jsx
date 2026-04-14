@@ -59,8 +59,8 @@ const HeroSection = () => {
     const el = sectionRef.current;
     if (!el) return;
     setTimeout(() => {
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
+      el.classList.remove('opacity-0', 'translate-y-[30px]');
+      el.classList.add('opacity-100', 'translate-y-0');
     }, 100);
   }, []);
 
@@ -74,158 +74,73 @@ const HeroSection = () => {
   return (
     <section
       id="home"
-      style={{
-        minHeight: '100vh',
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        background: 'var(--bg-primary)',
-      }}
+      className="min-h-screen relative flex items-center justify-center overflow-hidden bg-(--bg-primary)"
     >
       <ParticleCanvas />
 
       {/* Gradient blobs */}
-      <div style={{
-        position: 'absolute',
-        top: '-20%',
-        right: '-10%',
-        width: '600px',
-        height: '600px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)',
-        pointerEvents: 'none',
-        zIndex: 0,
-      }} />
-      <div style={{
-        position: 'absolute',
-        bottom: '-20%',
-        left: '-10%',
-        width: '500px',
-        height: '500px',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%)',
-        pointerEvents: 'none',
-        zIndex: 0,
-      }} />
+      <div 
+        className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%)' }}
+      />
+      <div 
+        className="absolute -bottom-[20%] -left-[10%] w-[500px] h-[500px] rounded-full pointer-events-none z-0"
+        style={{ background: 'radial-gradient(circle, rgba(79,142,247,0.12) 0%, transparent 70%)' }}
+      />
 
       <div
         ref={sectionRef}
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          textAlign: 'center',
-          padding: '0 24px',
-          maxWidth: '800px',
-          opacity: 0,
-          transform: 'translateY(30px)',
-          transition: 'opacity 1s ease, transform 1s ease',
-        }}
+        className="relative z-10 text-center px-6 max-w-[800px] opacity-0 translate-y-[30px] transition-all duration-1000 ease-out"
       >
         {/* Badge */}
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          padding: '8px 20px',
-          background: 'rgba(79,142,247,0.08)',
-          border: '1px solid rgba(79,142,247,0.2)',
-          borderRadius: '50px',
-          fontSize: '0.8rem',
-          fontWeight: '600',
-          color: '#4f8ef7',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          marginBottom: '28px',
-          animation: 'float 4s ease-in-out infinite',
-        }}>
-          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4f8ef7', display: 'inline-block', boxShadow: '0 0 8px #4f8ef7' }} />
+        <div 
+          className="inline-flex items-center gap-2 py-2 px-5 bg-[#4f8ef714] border border-[#4f8ef733] rounded-full text-[0.8rem] font-semibold text-[#4f8ef7] tracking-[2px] uppercase mb-7"
+          style={{ animation: 'float 4s ease-in-out infinite' }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[#4f8ef7] inline-block shadow-[0_0_8px_#4f8ef7]" />
           Available for Work
         </div>
 
         {/* Name */}
-        <h1 style={{
-          fontSize: 'clamp(2.5rem, 7vw, 5rem)',
-          fontWeight: '900',
-          fontFamily: 'Inter, sans-serif',
-          lineHeight: '1.1',
-          letterSpacing: '-2px',
-          marginBottom: '16px',
-          color: 'var(--text-primary)',
-        }}>
+        <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-black font-['Inter',sans-serif] leading-[1.1] tracking-[-2px] mb-4 text-(--text-primary)">
           Hi, I'm{' '}
-          <span style={{
-            background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
+          <span className="bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text">
             Mohamed Nasr
           </span>
         </h1>
 
         {/* Typing effect */}
-        <div style={{
-          fontSize: 'clamp(1.2rem, 3vw, 1.8rem)',
-          fontWeight: '600',
-          fontFamily: 'Inter, sans-serif',
-          height: '2.5rem',
-          marginBottom: '24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '8px',
-        }}>
-          <span style={{ color: 'var(--text-secondary)' }}>I'm a</span>
-          <span style={{
-            background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}>
+        <div className="text-[clamp(1.2rem,3vw,1.8rem)] font-semibold font-['Inter',sans-serif] h-10 mb-6 flex items-center justify-center gap-2">
+          <span className="text-(--text-secondary)">I'm a</span>
+          <span className="bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text">
             {typedText}
           </span>
-          <span style={{
-            display: 'inline-block',
-            width: '2px',
-            height: '1.4rem',
-            background: 'linear-gradient(180deg, #4f8ef7, #a855f7)',
-            borderRadius: '2px',
-            animation: 'blink 1s step-end infinite',
-          }} />
+          <span 
+            className="inline-block w-[2px] h-[1.4rem] bg-linear-to-b from-[#4f8ef7] to-[#a855f7] rounded-sm"
+            style={{ animation: 'blink 1s step-end infinite' }}
+          />
         </div>
 
         {/* Tagline */}
-        <p style={{
-          fontSize: 'clamp(0.95rem, 2vw, 1.15rem)',
-          color: 'var(--text-secondary)',
-          lineHeight: '1.8',
-          maxWidth: '580px',
-          margin: '0 auto 48px',
-          fontFamily: 'Inter, sans-serif',
-        }}>
+        <p className="text-[clamp(0.95rem,2vw,1.15rem)] text-(--text-secondary) leading-[1.8] max-w-[580px] mx-auto mb-12 font-['Inter',sans-serif]">
           Crafting immersive digital experiences through clean code,
           thoughtful design, and a relentless passion for building
           products that users love.
         </p>
 
         {/* CTAs */}
-        <div style={{
-          display: 'flex',
-          gap: '16px',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}>
+        <div className="flex gap-4 justify-center flex-wrap">
           <button
             id="hero-view-projects"
             className="btn-primary"
             onClick={scrollToProjects}
           >
-            <span>View Projects</span>
-            <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <div className="flex items-center gap-2">
+              <span>View Projects</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
           </button>
           <button
             id="hero-contact"
@@ -237,78 +152,37 @@ const HeroSection = () => {
         </div>
 
         {/* Stats */}
-        <div style={{
-          display: 'flex',
-          gap: '40px',
-          justifyContent: 'center',
-          marginTop: '64px',
-          flexWrap: 'wrap',
-        }}>
+        <div className="flex gap-10 justify-center mt-16 flex-wrap">
           {[
             { value: '2+', label: 'Years Experience' },
             { value: '2', label: 'Projects Built' },
             { value: '100%', label: 'Passion' },
           ].map((stat, i) => (
-            <div key={i} style={{ textAlign: 'center' }}>
-              <div style={{
-                fontSize: '2rem',
-                fontWeight: '800',
-                fontFamily: 'Inter, sans-serif',
-                background: 'linear-gradient(135deg, #4f8ef7, #a855f7)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                lineHeight: '1',
-              }}>{stat.value}</div>
-              <div style={{
-                fontSize: '0.8rem',
-                color: 'var(--text-muted)',
-                fontFamily: 'Inter, sans-serif',
-                marginTop: '6px',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-              }}>{stat.label}</div>
+            <div key={i} className="text-center">
+              <div className="text-[2rem] font-extrabold font-['Inter',sans-serif] bg-linear-to-br from-[#4f8ef7] to-[#a855f7] text-transparent bg-clip-text leading-none">
+                {stat.value}
+              </div>
+              <div className="text-[0.8rem] text-(--text-muted) font-['Inter',sans-serif] mt-1.5 tracking-[1px] uppercase">
+                {stat.label}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute',
-        bottom: '32px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '8px',
-        animation: 'float 3s ease-in-out infinite',
-        zIndex: 1,
-      }}>
-        <span style={{
-          fontSize: '0.7rem',
-          color: 'var(--text-muted)',
-          letterSpacing: '2px',
-          textTransform: 'uppercase',
-          fontFamily: 'Inter, sans-serif',
-        }}>Scroll</span>
-        <div style={{
-          width: '24px',
-          height: '40px',
-          border: '2px solid rgba(255,255,255,0.1)',
-          borderRadius: '12px',
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '4px 0',
-        }}>
-          <div style={{
-            width: '4px',
-            height: '8px',
-            background: 'linear-gradient(180deg, #4f8ef7, #a855f7)',
-            borderRadius: '2px',
-            animation: 'scrollDot 2s ease-in-out infinite',
-          }} />
+      <div 
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        style={{ animation: 'float 3s ease-in-out infinite' }}
+      >
+        <span className="text-[0.7rem] text-(--text-muted) tracking-[2px] uppercase font-['Inter',sans-serif]">
+          Scroll
+        </span>
+        <div className="w-6 h-10 border-2 border-white/10 rounded-xl flex justify-center py-1">
+          <div 
+            className="w-1 h-2 bg-linear-to-b from-[#4f8ef7] to-[#a855f7] rounded-sm"
+            style={{ animation: 'scrollDot 2s ease-in-out infinite' }}
+          />
         </div>
       </div>
 
